@@ -1,5 +1,4 @@
 {
   "username": "admin",
-  "password": "adminat",
-  "token": "${token}"
+  "password": "adminat"
 }

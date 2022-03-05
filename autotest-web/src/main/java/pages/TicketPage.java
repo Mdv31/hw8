@@ -30,7 +30,7 @@ public class TicketPage extends WebPage {
     private SelenideElement SubEmailField = $(By.id("id_submitter_email"));
 
     @Name("кнопка Submit Ticket")
-    private SelenideElement submitTicketButton = $x("//*[@id=\"content-wrapper\"]/div/div/div/div[2]/form/button");
+    private SelenideElement submitTicketButton = $x("//button[@type='submit']");
 
 
 

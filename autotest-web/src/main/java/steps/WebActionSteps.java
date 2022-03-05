@@ -12,6 +12,7 @@ import ru.lanit.at.utils.Sleep;
 import ru.lanit.at.web.pagecontext.PageManager;
 
 import java.io.File;
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -33,7 +34,7 @@ public class WebActionSteps {
     @Когда("кликнуть на элемент по тексту {string}")
     public void clickElementWithText(String text) {
         $(Selectors.byText(text))
-                //.shouldBe(Condition.visible)
+                .shouldBe(Condition.visible, Duration.ofSeconds(6))
                 .click();
         LOGGER.info("клик на элемент по тексту '{}'", text);
     }
@@ -115,7 +116,7 @@ public class WebActionSteps {
                 .getCurrentPage()
                 .getElement(field);
         fieldElement
-                //.shouldBe(Condition.visible)
+                .shouldBe(Condition.exist)
                 .uploadFile(file);
         LOGGER.info("в элемент '{}' загружен файл '{}'", field, value);
     }

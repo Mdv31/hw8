@@ -12,40 +12,40 @@ import static com.codeborne.selenide.Selenide.$x;
 public class TicketsPage extends WebPage {
 
     @Name("кнопка Save Query")
-    private SelenideElement saveQueryButton = $x("//*[@id=\"headingTwo\"]/h5/button");
+    private SelenideElement saveQueryButton = $x("//button[@class='btn btn-link collapsed btn-sm']");
 
     @Name("поле Query Name")
     private SelenideElement queryNameField = $(By.id("id_title"));
 
     @Name("кнопка2 Save Query")
-    private SelenideElement saveQueryButton2 = $x("//*[@id=\"collapseTwo\"]/div/form/div/input");
+    private SelenideElement saveQueryButton2 = $x("//input[@type='submit' and @value='Save Query']");
 
     @Name("кнопка Delete Saved Query")
-    private SelenideElement deleteSavedQueryButton = $x("//*[@id=\"collapseOne\"]/form/ul/li[9]/a");
+    private SelenideElement deleteSavedQueryButton = $x("//a[contains(text(), 'Delete Saved Query')]");
 
     @Name("кнопка2 Delete Saved Query")
-    private SelenideElement deleteSavedQueryButton2 = $x("//*[@id=\"content-wrapper\"]/div/form/button");
+    private SelenideElement deleteSavedQueryButton2 = $x("//button[contains(text(), 'Yes')] ");
 
     @Name("поле Поиск тикета")
     private SelenideElement searchField = $(By.id("search_query"));
 
     @Name("кнопка Go")
-    private SelenideElement goButton = $x("//*[@id=\"searchform\"]/div/div/button");
+    private SelenideElement goButton = $x("//button[@class='btn btn-primary'] ");
 
     @Name("кнопка Created")
-    private SelenideElement createdButton = $x("//*[@id=\"ticketTable\"]/thead/tr/th[4]");
+    private SelenideElement createdButton = $x("//th[contains(text(), 'Created')]");
 
     @Name("поле новый тикет")
-    private SelenideElement newTicketField = $x("//*[@id=\"ticketTable\"]/tbody/tr[1]/td[2]/div/a");
+    private SelenideElement newTicketField = $x("//*[@id='ticketTable']//a");
 
     @Name("кнопка Attach file")
     private SelenideElement attachFileButton = $(By.id("ShowFileUpload"));
 
     @Name("файл 0")
-    private SelenideElement file0 = $(By.id("file0"));
+    private SelenideElement attachmentFile0Button = $(By.id("file0"));
 
     @Name("кнопка Update This Ticket")
-    private SelenideElement updateButton = $x("//*[@id=\"content-wrapper\"]/div/div[3]/div[2]/form/button");
+    private SelenideElement updateButton = $x("//button[contains(text(), 'Update This Ticket')]");
 
 
 

@@ -18,5 +18,5 @@ public class LoginPage extends WebPage {
     private SelenideElement passwordField = $(By.id("password"));
 
     @Name("кнопка логина")
-    private SelenideElement loginButton = $x("//*[@id=\"content-wrapper\"]/div/div/div/div[2]/form/input[1]");
+    private SelenideElement loginButton = $x("//input[@type='submit' and @value='Login']");
 }
