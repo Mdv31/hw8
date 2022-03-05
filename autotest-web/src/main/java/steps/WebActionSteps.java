@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import ru.lanit.at.utils.Sleep;
 import ru.lanit.at.web.pagecontext.PageManager;
 
+import java.io.File;
+
 import static com.codeborne.selenide.Selenide.$;
 
 
@@ -31,7 +33,7 @@ public class WebActionSteps {
     @Когда("кликнуть на элемент по тексту {string}")
     public void clickElementWithText(String text) {
         $(Selectors.byText(text))
-                .shouldBe(Condition.visible)
+                //.shouldBe(Condition.visible)
                 .click();
         LOGGER.info("клик на элемент по тексту '{}'", text);
     }
@@ -94,6 +96,30 @@ public class WebActionSteps {
                 .setValue(value);
         LOGGER.info("в поле '{}' введено значение '{}'", field, value);
     }
+
+    @Когда("ввести в список {string} значение {string}")
+    public void fillTheDrop(String field, String value) {
+        SelenideElement fieldElement = pageManager
+                .getCurrentPage()
+                .getElement(field);
+        fieldElement
+                .shouldBe(Condition.visible)
+                .selectOptionContainingText(value);
+        LOGGER.info("в список '{}' введено значение '{}'", field, value);
+    }
+
+    @Когда("загрузить файл в {string} значение {string}")
+    public void uploadFile (String field, String value) {
+        File file = new File(value);
+        SelenideElement fieldElement = pageManager
+                .getCurrentPage()
+                .getElement(field);
+        fieldElement
+                //.shouldBe(Condition.visible)
+                .uploadFile(file);
+        LOGGER.info("в элемент '{}' загружен файл '{}'", field, value);
+    }
+
 
     /**
      * Очистка поля
