@@ -41,7 +41,7 @@ public class TicketsPage extends WebPage {
     @Name("кнопка Attach file")
     private SelenideElement attachFileButton = $(By.id("ShowFileUpload"));
 
-    @Name("файл 0")
+    @Name("Аттачмент файл 0")
     private SelenideElement attachmentFile0Button = $(By.id("file0"));
 
     @Name("кнопка Update This Ticket")

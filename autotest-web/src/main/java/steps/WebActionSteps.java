@@ -12,6 +12,9 @@ import ru.lanit.at.utils.Sleep;
 import ru.lanit.at.web.pagecontext.PageManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -111,6 +114,7 @@ public class WebActionSteps {
 
     @Когда("загрузить файл в {string} значение {string}")
     public void uploadFile (String field, String value) {
+
         File file = new File(value);
         SelenideElement fieldElement = pageManager
                 .getCurrentPage()
@@ -120,6 +124,23 @@ public class WebActionSteps {
                 .uploadFile(file);
         LOGGER.info("в элемент '{}' загружен файл '{}'", field, value);
     }
+
+    @Когда("загрузить тестовый файл в {string} имя файла {string}")
+    public void uploadGeneratedFile (String field, String value) throws IOException {
+        FileOutputStream out = new FileOutputStream(value);
+        out.close();
+
+        File file = new File(value);
+        SelenideElement fieldElement = pageManager
+                .getCurrentPage()
+                .getElement(field);
+        fieldElement
+                .shouldBe(Condition.exist)
+                .uploadFile(file);
+        LOGGER.info("в элемент '{}' загружен файл '{}'", field, value);
+        file.delete();
+    }
+
 
 
     /**
