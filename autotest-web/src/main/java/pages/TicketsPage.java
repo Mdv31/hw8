@@ -40,16 +40,14 @@ public class TicketsPage extends WebPage {
 
     @Name("кнопка Attach file")
     private SelenideElement attachFileButton = $(By.id("ShowFileUpload"));
+/*
+    @Name("кнопка Browse файл 0")
+    private SelenideElement BrowseFile0Button = $(By.id("file0"));*/
+    @Name("кнопка Browse файл 0")
+    private SelenideElement BrowseFile0Button = $x("//label[contains(text(), 'Browse')]");
 
-    @Name("Аттачмент файл 0")
-    private SelenideElement attachmentFile0Button = $(By.id("file0"));
 
     @Name("кнопка Update This Ticket")
     private SelenideElement updateButton = $x("//button[contains(text(), 'Update This Ticket')]");
-
-
-
-
-
 
 }

@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.cucumber.java.ru.Если;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
+import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.lanit.at.utils.Sleep;
@@ -120,7 +121,7 @@ public class WebActionSteps {
                 .getCurrentPage()
                 .getElement(field);
         fieldElement
-                .shouldBe(Condition.exist)
+                .shouldBe(Condition.visible)
                 .uploadFile(file);
         LOGGER.info("в элемент '{}' загружен файл '{}'", field, value);
     }
@@ -128,6 +129,12 @@ public class WebActionSteps {
     @Когда("загрузить тестовый файл в {string} имя файла {string}")
     public void uploadGeneratedFile (String field, String value) throws IOException {
         FileOutputStream out = new FileOutputStream(value);
+        String text = "123";
+        byte[] b= text.getBytes();
+        int bLen = 1024;
+        for (int i=0; i < bLen*1024;i++){
+                                out.write(b);
+                            }
         out.close();
 
         File file = new File(value);
@@ -135,9 +142,10 @@ public class WebActionSteps {
                 .getCurrentPage()
                 .getElement(field);
         fieldElement
-                .shouldBe(Condition.exist)
-                .uploadFile(file);
+                .shouldBe(Condition.visible)
+                .find(By.id("file0")).uploadFile(file);
         LOGGER.info("в элемент '{}' загружен файл '{}'", field, value);
+        out.flush();
         file.delete();
     }
 
