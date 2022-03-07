@@ -126,13 +126,12 @@ public class WebActionSteps {
         LOGGER.info("в элемент '{}' загружен файл '{}'", field, value);
     }
 
-    @Когда("загрузить тестовый файл в {string} имя файла {string}")
-    public void uploadGeneratedFile (String field, String value) throws IOException {
+    @Когда("загрузить тестовый файл в {string} имя файла {string} размер файла Mb {int}")
+    public void uploadGeneratedFile (String field, String value, int bLen) throws IOException {
         FileOutputStream out = new FileOutputStream(value);
-        String text = "123";
+        String text = "1234567812345678";
         byte[] b= text.getBytes();
-        int bLen = 1024;
-        for (int i=0; i < bLen*1024;i++){
+        for (int i=0; i < bLen*16*1024;i++){
                                 out.write(b);
                             }
         out.close();
