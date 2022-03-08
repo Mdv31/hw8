@@ -131,7 +131,7 @@ public class WebActionSteps {
         FileOutputStream out = new FileOutputStream(value);
         String text = "1234567812345678";
         byte[] b= text.getBytes();
-        for (int i=0; i < bLen*16*1024;i++){
+        for (int i=0; i < bLen*64*1024;i++){
                                 out.write(b);
                             }
         out.close();
@@ -145,7 +145,7 @@ public class WebActionSteps {
                 .find(By.id("file0")).uploadFile(file);
         LOGGER.info("в элемент '{}' загружен файл '{}'", field, value);
         out.flush();
-        file.delete();
+        //file.delete();
     }
 
 
