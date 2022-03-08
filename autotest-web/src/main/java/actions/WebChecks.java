@@ -80,7 +80,7 @@ public class WebChecks {
     public static void textVisibleOnPage(String text, Integer timeoutSeconds) {
         int timeout = getTimeoutSeconds(timeoutSeconds);
         $(Selectors.byText(text))
-                .shouldBe(Condition.visible, Duration.ofSeconds(timeout));
+                .shouldBe(Condition.exist, Duration.ofSeconds(timeout));
     }
 
     /**

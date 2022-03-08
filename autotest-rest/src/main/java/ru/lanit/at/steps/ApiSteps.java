@@ -35,7 +35,7 @@ public class ApiSteps {
     @И("добавить header")
     public void addHeaders(DataTable dataTable) {
         Map<String, String> headers = new HashMap<>();
-        dataTable.asLists().forEach(it -> headers.put(it.get(0), it.get(1)));
+        dataTable.asLists().forEach(it -> headers.put(it.get(0), replaceVarsIfPresent(it.get(1))));
         apiRequest.setHeaders(headers);
     }
 
@@ -67,8 +67,6 @@ public class ApiSteps {
             ContextHolder.put(k, extractedValue);
             Allure.addAttachment(k, "application/json", extractedValue, ".txt");
             LOG.info("Извлечены данные: {}={}", k, extractedValue);
-            System.out.println(extractedValue); // !!! !!!
-            System.out.println(k);
         });
     }
 

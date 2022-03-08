@@ -6,10 +6,17 @@ import com.codeborne.selenide.SelenideElement;
 import io.cucumber.java.ru.Если;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
+import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.lanit.at.utils.Sleep;
 import ru.lanit.at.web.pagecontext.PageManager;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -31,7 +38,7 @@ public class WebActionSteps {
     @Когда("кликнуть на элемент по тексту {string}")
     public void clickElementWithText(String text) {
         $(Selectors.byText(text))
-                .shouldBe(Condition.visible)
+                .shouldBe(Condition.visible, Duration.ofSeconds(6))
                 .click();
         LOGGER.info("клик на элемент по тексту '{}'", text);
     }
@@ -94,6 +101,54 @@ public class WebActionSteps {
                 .setValue(value);
         LOGGER.info("в поле '{}' введено значение '{}'", field, value);
     }
+
+    @Когда("ввести в список {string} значение {string}")
+    public void fillTheDrop(String field, String value) {
+        SelenideElement fieldElement = pageManager
+                .getCurrentPage()
+                .getElement(field);
+        fieldElement
+                .shouldBe(Condition.visible)
+                .selectOptionContainingText(value);
+        LOGGER.info("в список '{}' введено значение '{}'", field, value);
+    }
+
+    @Когда("загрузить файл в {string} значение {string}")
+    public void uploadFile (String field, String value) {
+
+        File file = new File(value);
+        SelenideElement fieldElement = pageManager
+                .getCurrentPage()
+                .getElement(field);
+        fieldElement
+                .shouldBe(Condition.visible)
+                .uploadFile(file);
+        LOGGER.info("в элемент '{}' загружен файл '{}'", field, value);
+    }
+
+    @Когда("загрузить тестовый файл в {string} имя файла {string} размер файла Mb {int}")
+    public void uploadGeneratedFile (String field, String value, int bLen) throws IOException {
+        FileOutputStream out = new FileOutputStream(value);
+        String text = "1234567812345678";
+        byte[] b= text.getBytes();
+        for (int i=0; i < bLen*64*1024;i++){
+                                out.write(b);
+                            }
+        out.close();
+
+        File file = new File(value);
+        SelenideElement fieldElement = pageManager
+                .getCurrentPage()
+                .getElement(field);
+        fieldElement
+                .shouldBe(Condition.visible)
+                .find(By.id("file0")).uploadFile(file);
+        LOGGER.info("в элемент '{}' загружен файл '{}'", field, value);
+        out.flush();
+        file.delete();
+    }
+
+
 
     /**
      * Очистка поля

@@ -55,7 +55,7 @@
       | method | path               | body              |
       | PUT    | /api/tickets/${id} | createTicket.json |
     * добавить header
-      | Authorization   | token c1803e6e3b12359683796496625e8518b2e082c3  |
+      | Authorization   | token ${token}   |
       | Accept          | application/json |
       | Content-Type    | application/json |
     * отправить запрос
