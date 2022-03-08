@@ -145,7 +145,7 @@ public class WebActionSteps {
                 .find(By.id("file0")).uploadFile(file);
         LOGGER.info("в элемент '{}' загружен файл '{}'", field, value);
         out.flush();
-        //file.delete();
+        file.delete();
     }
 
 
